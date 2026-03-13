@@ -1,2 +1,29 @@
-# VDCABT
-Simple bash script automating creation and wireless broadcast of virtual display on Linux.
+# 🪻VDCABT🌷
+Простой bash скрипт позволяющий за несколько минут создать виртуальный дисплей (заглушку) и транслировать его содержиме на другие устройства.
+## Быстрый старт🐓
+**Шаг 1** :
+Скопируйте скрипт и необходимые файлы в любую папку и зайдите в неё <img src="https://media.tenor.com/yknttBHpnjsAAAAM/wahid-yimshee-kilometraat.gif" width="10" alt="hood irony">
+```bash
+git clone https://github.com/m0p7mka/VDCABT.git
+cd VDCABT
+```
+**Шаг 2** :
+Сделайте скрипт исполняемым и запустите от имени суперпользователя
+```bash
+chmod +x main.sh
+sudo ./main.sh
+```
+**Шаг 3** :
+Следуйте инструкциям скрипта и перезапустите систему после завершения для применения изменений
+```bash
+sudo reboot
+```
+**Шаг 4** :
+Зайдите в интерфейс Sunshine через иконку в трее или по адресу https://localhost:47990 и пройдите первичную настройку. 
+Если вы не включили автозагрузку при установке запустите через терминал
+```bash
+sunshine
+```
+**Шаг 5** :
+Установите клиент [Moonlight](https://moonlight-stream.org/) на ваше устройство и подклчитесь к компьютеру по локальному ip
+### Готово🎉
