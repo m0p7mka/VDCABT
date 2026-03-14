@@ -1,10 +1,10 @@
 # 🪻VDCABT🌷
 
-## English
+## English 🇺🇲
 
 A simple bash script that lets you create a virtual display (dummy) and stream its content to other devices in just a few minutes.
 
-### Quick Start🐓
+## Quick Start 🐓
 
 **Step 1** :
 Copy the script and necessary files to any folder and navigate into it <img src="https://media.tenor.com/yknttBHpnjsAAAAM/wahid-yimshee-kilometraat.gif" width="10" alt="hood irony">
@@ -36,17 +36,30 @@ sunshine
 **Step 5** :
 Install the [Moonlight](https://moonlight-stream.org/) client on your device and connect to the computer via local IP
 
-### Done🎉
+### Done 🎉
 
-## I will later write about recommended settings, troubleshooting, and create a script to remove the created dummy displays.
+## Settings 🦧
+For display settings (resolution, refresh rate, position relative to the main monitor) open System Settings and go to the Screen and Monitor section. Streaming settings are configured through the Sunshine interface.
+**Recommended Sunshine configuration** :
+```bash
+# in Audio/Video
+Maximum bitrate < 1500
+Minimum FPS target = 60
+# in Software Encoder
+SW Presets = ultrafast
+```
+
+## Possible Problems 🪾
+**When connecting to the stream you see your main monitor** : In the Sunshine configuration, in the Audio/Video section, change the value of config.output_name_unix.
+**If you encounter other issues, please write about them and I will try to help**
 
 ---
 
-## Русский
+## Русский 🇷🇺
 
 Простой bash скрипт позволяющий за несколько минут создать виртуальный дисплей (заглушку) и транслировать его содержиме на другие устройства.
 
-### Быстрый старт🐓
+## Быстрый старт 🐓
 
 **Шаг 1** :
 Скопируйте скрипт и необходимые файлы в любую папку и зайдите в неё <img src="https://media.tenor.com/yknttBHpnjsAAAAM/wahid-yimshee-kilometraat.gif" width="10" alt="hood irony">
@@ -78,6 +91,18 @@ sunshine
 **Шаг 5** :
 Установите клиент [Moonlight](https://moonlight-stream.org/) на ваше устройство и подключитесь к компьютеру по локальному ip
 
-### Готово🎉
+### Готово 🎉
 
-## Позже я напишу о рекомендуемых настройках, проблемах и создам скрипт удаления созданных заглушек.
+## Настройки 🦧
+Для настроек самого дисплея (разрешение, частота обновление, расположение относительно основного монитора) откройте Параметры системы и перейдите в раздел Экран и монитор. Настройки трансляции осуществляются через интерфейс Sunshine.
+**Рекомеднуемая конфигурация Sunshine** :
+```bash
+# в Audio/Video
+Maximum bitrate < 1500
+Minimum FPS target = 60
+# в Software Encoder
+SW Presets = ultrafast
+```
+## Возможные проблемы 🪾
+**При подключении к тарнсляции вы видите свой основной монитор** : В конфигурации Sunshine в разделе Audio/Video измените значение config.output_name_unix.
+**Если у вас возникнут другие проблемы напишите о них и я постараюсь помочь**
