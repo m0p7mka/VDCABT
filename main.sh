@@ -4,6 +4,7 @@ exec > >(tee -a "./logs/$(date +%Y%m%d_%H%M%S).log") 2>&1
 
 red='\033[0;31m'
 nc='\033[0m'
+green='\033[0;32m'
 
 if [[ $EUID -ne 0 ]]; then
    echo "This script should be launched with root priveleges!"
@@ -44,8 +45,59 @@ if [[ ! -f "./edids/$filename" ]]; then
     echo "Cant find EDID files."
     exit 1
 fi
+
+mkdir -p /usr/lib/firmware/edid
 cp "./edids/$filename" /usr/lib/firmware/edid/ || { echo "Failed to copy EDID file."; exit 1; }
 [ -f "/usr/lib/firmware/edid/$filename" ] || { echo "EDID file not copied"; exit 1; }
+
+update_initramfs() {
+    local edid_file="$1"
+    echo "Updating initramfs to include EDID file: $edid_file"
+
+    if command -v mkinitcpio &>/dev/null; then
+        echo "Detected mkinitcpio. Adding EDID to FILES and rebuilding..."
+        if ! grep -q "$edid_file" /etc/mkinitcpio.conf; then
+            cp /etc/mkinitcpio.conf /etc/mkinitcpio.conf.backup.$(date +%Y%m%d_%H%M%S)
+            if grep -q '^FILES=' /etc/mkinitcpio.conf; then
+                sed -i "/^FILES=/ s|)| $edid_file)|" /etc/mkinitcpio.conf
+            else
+                echo "FILES=($edid_file)" >> /etc/mkinitcpio.conf
+            fi
+        fi
+        mkinitcpio -P
+
+    elif command -v update-initramfs &>/dev/null; then
+        echo "Detected update-initramfs. Adding EDID to initramfs.conf and rebuilding..."
+        local conf_file="/etc/initramfs-tools/initramfs.conf"
+        if ! grep -q "^FILES=" "$conf_file"; then
+            echo "FILES=$edid_file" >> "$conf_file"
+        elif ! grep -q "$edid_file" "$conf_file"; then
+            sed -i "s|^FILES=\(.*\)|FILES=\1 $edid_file|" "$conf_file"
+        fi
+        update-initramfs -u
+
+    elif command -v dracut &>/dev/null; then
+        echo "Detected dracut. Creating config and rebuilding initramfs..."
+        local dracut_conf_dir="/etc/dracut.conf.d"
+        mkdir -p "$dracut_conf_dir"
+        local conf_file="$dracut_conf_dir/edid.conf"
+        echo "install_items+=\" $edid_file \"" >> "$conf_file"
+        dracut --force --regenerate-all
+
+    elif command -v mkinitrd &>/dev/null; then
+        echo "Detected mkinitrd. Rebuilding initramfs..."
+        mkinitrd
+
+    else
+        echo -e "${red}Could not automatically update initramfs.${nc}"
+        echo "Please ensure the EDID file is included in your initramfs manually."
+        echo "Otherwise the 2‑minute delay will persist."
+        return 1
+    fi
+    echo -e "${green}Initramfs updated successfully.${nc}"
+}
+
+update_initramfs "/usr/lib/firmware/edid/$filename"
 
 current=$(grep '^GRUB_CMDLINE_LINUX_DEFAULT=' /etc/default/grub | cut -d= -f2- | tr -d '"' | tr -d "'")
 new_value="drm.edid_firmware=$output:edid/$filename video=$output:e"
@@ -83,7 +135,6 @@ fi
 install_sunshine() {
     echo "Installing Sunshine..."
     if command -v pacman &> /dev/null; then
-        # Arch
         if command -v yay &> /dev/null; then
             yay -S --noconfirm sunshine
         elif command -v paru &> /dev/null; then
@@ -103,7 +154,7 @@ install_sunshine() {
         echo "Unsupported distribution. Try installing via Flatpak or Snap."
         exit 1
     fi
-    echo "Sunshine installed."
+    echo "${green}Sunshine installed.${nc}"
 }
 
 echo ""
