@@ -8,7 +8,7 @@ nc='\033[0m'
 green='\033[0;32m'
 
 if [[ $EUID -ne 0 ]]; then
-   echo "This script should be launched with root priveleges!"
+   echo -e "${red}This script should be launched with root priveleges!${nc}"
    echo "Use: sudo $0"
    exit 1
 fi
@@ -43,7 +43,7 @@ else
     filename="aoc-c24g1-hdmi"
 fi
 if [[ ! -f "./edids/$filename" ]]; then
-    echo "Cant find EDID files."
+    echo -e "${red}Cant find EDID files.${nc}"
     exit 1
 fi
 
@@ -110,7 +110,7 @@ read -p "Apply changes? (y/N) [default y]: " confirm
 confirm=${confirm:-y}
 if [[ $confirm == [yY] ]]; then
     if [ ! -w "/etc/default/grub" ]; then
-        echo "Cant write to /etc/default/grub."
+        echo -e "${red}Cant write to /etc/default/grub.${nc}"
         exit 1
     fi
     cp /etc/default/grub "/etc/default/grub.backup.$(date +%Y%m%d_%H%M%S)"
@@ -126,7 +126,7 @@ if [[ $confirm == [yY] ]]; then
     elif command -v grub2-mkconfig &> /dev/null; then
         sudo grub2-mkconfig -o /boot/grub2/grub.cfg
     else
-        echo "Please update GRUB configuration manually."
+        echo -e "${red}Please update GRUB configuration manually.${nc}"
     fi
     echo "Grub config was changed. "
 else
