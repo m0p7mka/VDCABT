@@ -1,6 +1,7 @@
 #!/bin/bash
 
-exec > >(tee -a "./logs/$(date +%Y%m%d_%H%M%S).log") 2>&1
+mkdir -p ./logs
+exec > >(tee -a "./logs/main_$(date +%Y%m%d_%H%M%S).log") 2>&1
 
 red='\033[0;31m'
 nc='\033[0m'
