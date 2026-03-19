@@ -61,7 +61,8 @@ SW Presets = ultrafast
 chmod +x remover.sh
 sudo ./remover.sh
 ```
-**If you encounter other issues, please write about them and I will try to help**
+**At this stage the script fully performs its functions on my system (KDE Manjaro Linux) and I have nothing else to add.**  
+**If you have any other problems, please write about them and I will try to help.**
 
 ---
 
@@ -125,4 +126,5 @@ SW Presets = ultrafast
 chmod +x remover.sh
 sudo ./remover.sh
 ```
-**Если у вас возникнут другие проблемы напишите о них и я постараюсь помочь**
+**На данном этапе скрипт полностью выполняет свои функции на моей системе (KDE Manjaro Linux) и мне нечего к нему добавить.**   
+**Если у вас возникнут другие проблемы, напишите о них и я постараюсь помочь.**
