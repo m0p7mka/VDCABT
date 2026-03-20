@@ -9,10 +9,10 @@ A simple bash script that allows you to create a virtual display (dummy) in a fe
 - Adds a file to GRUB that forces the video driver to activate a video output and generate an image for it with the specified parameters.
 - Installs a utility for streaming this image to other devices.
 
-## Quick Start 🐓
+## Quick Start 🚀
 
 **Step 1** :
-Copy the script and necessary files to any folder and navigate into it <img src="https://media.tenor.com/yknttBHpnjsAAAAM/wahid-yimshee-kilometraat.gif" width="10" alt="hood irony">
+Copy the script and necessary files to any folder and navigate into it
 ```bash
 git clone https://github.com/m0p7mka/VDCABT.git
 cd VDCABT
@@ -75,10 +75,10 @@ sudo ./remover.sh
 - Добавляет в GRUB файл указание драйверу видеокарты принудительно активировать видеовыход и генерировать для него изображение по заданным характеристикам.
 - Устанавливает утилиту для трансляции этого изображения на другие устройства.
 
-## Быстрый старт 🐓
+## Быстрый старт 🚀
 
 **Шаг 1** :
-Скопируйте скрипт и необходимые файлы в любую папку и зайдите в неё <img src="https://media.tenor.com/yknttBHpnjsAAAAM/wahid-yimshee-kilometraat.gif" width="10" alt="hood irony">
+Скопируйте скрипт и необходимые файлы в любую папку и зайдите в неё 
 ```bash
 git clone https://github.com/m0p7mka/VDCABT.git
 cd VDCABT
