@@ -4,7 +4,7 @@
 
 A simple bash script that allows you to create a virtual display (dummy) in a few minutes and stream its contents to other devices.
 
-## What this script does 🤨
+## What this script does ❔
 - Adds an EDID file (monitor characteristics dump) to initramfs.
 - Adds a file to GRUB that forces the video driver to activate a video output and generate an image for it with the specified parameters.
 - Installs a utility for streaming this image to other devices.
@@ -70,7 +70,7 @@ sudo ./remover.sh
 
 Простой bash скрипт позволяющий за несколько минут создать виртуальный дисплей (заглушку) и транслировать его содержиме на другие устройства.
 
-## Что делает этот скрипт 🤨
+## Что делает этот скрипт ❔
 - Добавляет EDID файл (дамп характеристик монитора) в intiramfs.
 - Добавляет в GRUB файл указание драйверу видеокарты принудительно активировать видеовыход и генерировать для него изображение по заданным характеристикам.
 - Устанавливает утилиту для трансляции этого изображения на другие устройства.
