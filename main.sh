@@ -92,18 +92,25 @@ update_initramfs() {
     else
         echo -e "${red}Could not automatically update initramfs.${nc}"
         echo "Please ensure the EDID file is included in your initramfs manually."
-        echo "Otherwise the 2‑minute delay will persist."
+        echo "Otherwise the system may boot incorrectly."
         return 1
     fi
     echo -e "${green}Initramfs updated successfully.${nc}"
 }
 
-update_initramfs "/usr/lib/firmware/edid/$filename"
+read -p "Add EDID file to initramfs? (y/N) [default y]: " confirm
+confirm=${confirm:-y}
+if [[ $confirm == [yY] ]]; then
+    update_initramfs "/usr/lib/firmware/edid/$filename"
+else
+    echo "Please ensure the EDID file is included in your initramfs manually."
+    echo "Otherwise the system may boot incorrectly."
+fi
 
 current=$(grep '^GRUB_CMDLINE_LINUX_DEFAULT=' /etc/default/grub | cut -d= -f2- | tr -d '"' | tr -d "'")
-new_value="drm.edid_firmware=$output:edid/$filename video=$output:e"
+new_value="$current drm.edid_firmware=$output:edid/$filename video=$output:e"
 
-echo -e "In ${red}/etc/default/grub${nc} string ${red}$(grep '^GRUB_CMDLINE_LINUX_DEFAULT=' /etc/default/grub)${nc} will be replaced with string ${red}GRUB_CMDLINE_LINUX_DEFAULT=\"$new_value\"${nc}"
+echo -e "In ${red}/etc/default/grub${nc} string ${red}$(grep '^GRUB_CMDLINE_LINUX_DEFAULT=' /etc/default/grub)${nc} will be replaced with string ${red}GRUB_CMDLINE_LINUX_DEFAULT=\"$new_value\"${nc} and backup will be created."
 sleep 3
 
 read -p "Apply changes? (y/N) [default y]: " confirm
@@ -137,29 +144,16 @@ install_sunshine() {
     echo "Installing Sunshine..."
     if command -v pacman &> /dev/null; then
         if command -v yay &> /dev/null; then
-            yay -S --noconfirm sunshine
-        elif command -v paru &> /dev/null; then
-            paru -S --noconfirm sunshine
-        else
-            echo "Please install yay or paru first."
-            exit 1
-        fi
-    elif command -v dnf &> /dev/null; then
-        sudo dnf copr enable lizardbyte/stable -y
-        sudo dnf install sunshine -y
-    elif command -v apt &> /dev/null; then
-        echo "Warning: This package is built for Ubuntu 22.04. If you use another version, installation may fail."
-        wget https://github.com/LizardByte/Sunshine/releases/latest/download/sunshine-ubuntu-22.04-amd64.deb
-        sudo dpkg -i sunshine-*.deb || sudo apt install -f -y
-    else
-        echo "Unsupported distribution. Try installing via Flatpak or Snap."
+            echo -e "\n[lizardbyte]\nSigLevel = Optional\nServer = https://github.com/LizardByte/pacman-repo/releases/latest/download" | sudo tee -a /etc/pacman.conf
+            sudo pacman -Sy
+            sudo pacman -S lizardbyte/sunshine
+        echo "Unsupported distribution."
         exit 1
     fi
     echo "${green}Sunshine installed.${nc}"
 }
 
 echo ""
-echo -e "${red}WARNING${nc}: If you are not using Arch based distro it's recommended for you to install Sunshine manually."
 read -p 'Install Sunshine? (y/N) [default y]: ' confirm
 confirm=${confirm:-y}
 if [[ $confirm == [yY] ]];then
