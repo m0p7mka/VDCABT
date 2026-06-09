@@ -1,4 +1,4 @@
-# 🪻VDCABT🌷
+# VDCABT
 
 ## English 🇺🇲
 
@@ -41,9 +41,9 @@ sunshine
 **Step 5** :
 Install the [Moonlight](https://moonlight-stream.org/) client on your device and connect to the computer via local IP
 
-### Done 🎉
+### Done 
 
-## Settings 🦧
+## Settings 
 For display settings (resolution, refresh rate, position relative to the main monitor) open System Settings and go to the Screen and Monitor section. Streaming settings are configured through the Sunshine interface.  
 **Recommended Sunshine configuration** :
 ```bash
@@ -54,7 +54,7 @@ Minimum FPS target = 60
 SW Presets = ultrafast
 ```
 
-## Possible Problems 🪾
+## Possible Problems 
 **Why do I see my main monitor when connecting to the stream?** : In the Sunshine configuration, in the Audio/Video section, change the value of config.output_name_unix.  
 **How do I remove all of this now?** : Run the remover script and follow the instructions.
 ```bash
@@ -107,9 +107,9 @@ sunshine
 **Шаг 5** :
 Установите клиент [Moonlight](https://moonlight-stream.org/) на ваше устройство и подключитесь к компьютеру по локальному ip
 
-### Готово 🎉
+### Готово 
 
-## Настройки 🦧
+## Настройки 
 Для настроек самого дисплея (разрешение, частота обновление, расположение относительно основного монитора) откройте Параметры системы и перейдите в раздел Экран и монитор. Настройки трансляции осуществляются через интерфейс Sunshine.  
 **Рекомеднуемая конфигурация Sunshine** :
 ```bash
@@ -119,7 +119,7 @@ Minimum FPS target = 60
 # в Software Encoder
 SW Presets = ultrafast
 ```
-## Возможные проблемы 🪾
+## Возможные проблемы 
 **Почему я вижу свой основной монитор при подклчении к трансляции?** : В конфигурации Sunshine в разделе Audio/Video измените значение config.output_name_unix.  
 **Как мне теперь все это удалить?** : Запустите скрипт remover и следуйте инструкциям.
 ```bash
